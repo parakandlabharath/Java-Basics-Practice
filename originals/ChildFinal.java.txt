@@ -1,0 +1,22 @@
+
+final class ParentFinal {
+    int age=77;
+    public void display(){
+        System.out.println("Age: "+age);
+    }
+    
+}   
+
+public class ChildFinal extends ParentFinal{
+    int age=88;
+    public void display(){
+        System.out.println("Age: "+age);
+    }
+    public static void main(String[] args) {
+        ChildFinal c = new ChildFinal();
+        c.display();
+        c.age=99;
+        c.getAge();
+    }
+    
+}
