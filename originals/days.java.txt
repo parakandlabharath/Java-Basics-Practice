@@ -1,0 +1,33 @@
+class SwitchEnumDemo
+{
+    public static void main(String [] args);
+    enum Days{
+        MONDAY,
+        TUESDAY,
+        FRIDAY
+    }
+    Days d1= Days.MONDAY;
+    switch(ch1)
+    {
+        case MONDAY:
+            {
+                System.out,println("This case is MONDAY");
+                break;
+            }
+            case TUESDAY:
+            {
+                System.out,println("This case is TUESDAY");
+                break;
+            }
+            case FRIDAY:
+            {
+                System.out,println("This case is FRIDAY");
+                break;
+            }
+            default:
+                {
+                    System.out.println("");
+                    break;
+                }
+    }
+}
