@@ -1,0 +1,76 @@
+class Animal{
+    void sound(){
+        System.out.println("Animal makes a sound");
+    }
+    class Dog extends Animal{
+        void sound(){
+            System.out.println("Dog barks");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.java.basics.opps.inheritances;
+
+public class Shape implements Rectangle, Circle {
+	@Override
+	public void area() {
+		int res1=len*bre;
+		float res2 = 7.77f*radius*radius;
+		System.out.println("The res1 value is"+res1);
+		System.out.println("The res2 value is"+res2);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+package com.java.basics.opps.inheritances;
+
+public interface Circle {
+	 float radius=70.77f;
+	void area();
+
+}
+
+
+
+
+
+
+
+package com.java.basics.opps.inheritances;
+
+public interface Rectangle {
+	int len=10,bre=20;
+	void area();
+
+}
