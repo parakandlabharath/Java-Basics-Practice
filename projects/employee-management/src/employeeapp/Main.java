@@ -87,14 +87,28 @@ public class Main {
     }
 
     private static int readInt(String prompt) {
-        System.out.print(prompt);
-        try { return Integer.parseInt(SCANNER.nextLine().trim()); }
-        catch (NumberFormatException exception) { throw new IllegalArgumentException("Enter a whole number."); }
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return Integer.parseInt(SCANNER.nextLine().trim());
+            } catch (NumberFormatException exception) {
+                System.out.println("Please enter a valid whole number.");
+            }
+        }
     }
 
     private static double readDouble(String prompt) {
-        System.out.print(prompt);
-        try { return Double.parseDouble(SCANNER.nextLine().trim()); }
-        catch (NumberFormatException exception) { throw new IllegalArgumentException("Enter a valid number."); }
+        while (true) {
+            System.out.print(prompt);
+            try {
+                double value = Double.parseDouble(SCANNER.nextLine().trim());
+                if (Double.isFinite(value) && value >= 0) {
+                    return value;
+                }
+                System.out.println("Enter a finite, non-negative amount.");
+            } catch (NumberFormatException exception) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
     }
 }
