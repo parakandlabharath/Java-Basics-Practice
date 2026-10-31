@@ -70,3 +70,22 @@ A Java console application to add, view, search, update, and delete employee rec
 ## Learning note
 
 These are hands-on learning exercises, not claims of production-ready applications. The `originals/` folder preserves earlier snapshots; use the organized folders above for the cleaned-up examples.
+
+## Repaired practice examples
+
+Some uploaded drafts had incomplete class declarations, incorrect imports, missing methods, or class/file-name mismatches. Clean runnable versions are organized here:
+
+- `basics/CharacterIncrementDemo.java` — corrected public class name and post-increment explanation.
+- `basics/ArmstrongNumber.java` — supports Armstrong numbers with any number of digits and validates input.
+- `basics/AmicableNos.java` — validates positive inputs and calculates proper-divisor sums.
+- `basics/SwitchEnumDemo.java` — corrected enum and switch syntax.
+- `oops/InheritanceDemo.java` — corrected Animal/Dog inheritance and overriding.
+- `oops/FinalClassDemo.java` — demonstrates inherited methods and accessing parent state through a getter.
+- `oops/InterfaceMultipleInheritanceDemo.java` — demonstrates implementing multiple interfaces.
+- `collections/CollectionsSortDemo.java` — corrected `Collections.sort()` usage.
+
+The `originals/` directory is a historical archive of the uploaded drafts. It intentionally preserves incomplete or broken snapshots for learning/reference; use the repaired examples above instead. Files in that archive ending in `.txt` are not part of the runnable Java source set.
+
+## Automatic compilation check
+
+A GitHub Actions workflow compiles the organized Java examples with JDK 17 whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
