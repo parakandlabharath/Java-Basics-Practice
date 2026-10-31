@@ -7,6 +7,7 @@ public class Employee {
     private double salary;
 
     public Employee(int id, String name, String department, double salary) {
+        if (id <= 0) throw new IllegalArgumentException("ID must be positive.");
         this.id = id;
         setName(name);
         setDepartment(department);
@@ -29,7 +30,9 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
-        if (salary < 0) throw new IllegalArgumentException("Salary cannot be negative.");
+        if (!Double.isFinite(salary) || salary < 0) {
+            throw new IllegalArgumentException("Salary must be a finite, non-negative number.");
+        }
         this.salary = salary;
     }
 
