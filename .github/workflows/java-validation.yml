@@ -1,0 +1,58 @@
+name: Java validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Compile independent Java examples
+        shell: bash
+        run: |
+          set -euo pipefail
+          BUILD_DIR="$(mktemp -d)"
+
+          compile_folder() {
+            local source_dir="$1"
+            local output_dir="$BUILD_DIR/$(echo "$source_dir" | tr '/' '_')"
+            mkdir -p "$output_dir"
+            mapfile -d '' files < <(find "$source_dir" -maxdepth 1 -name '*.java' -print0)
+            if (("${#files[@]}" > 0)); then
+              echo "Compiling $source_dir"
+              javac -d "$output_dir" "${files[@]}"
+            fi
+          }
+
+          compile_folder basics
+          compile_folder oops
+          compile_folder collections
+          compile_folder collections/comparable
+          compile_folder collections/hashset
+          compile_folder mini-projects/employee-management-system
+
+          mkdir -p "$BUILD_DIR/packages"
+          javac -d "$BUILD_DIR/packages" \
+            basics/packages/com/java/basics/Sample.java \
+            basics/packages/PackageDemo.java
+
+          mkdir -p "$BUILD_DIR/employee-management"
+          javac -d "$BUILD_DIR/employee-management" \
+            projects/employee-management/src/employeeapp/Employee.java \
+            projects/employee-management/src/employeeapp/EmployeeManager.java \
+            projects/employee-management/src/employeeapp/Main.java
+
+          echo "All organized Java examples compiled successfully."
