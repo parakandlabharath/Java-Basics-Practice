@@ -1,37 +1,53 @@
 import java.util.Scanner;
-class AmicableNos
-{
-    public static void main(String args[])
-    {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter two numbers: ");
-        int num1 = sc.nextInt();
-        int num2 = sc.nextInt();
-        int sum1 = 0, sum2 = 0;
 
-        for(int i = 1; i < num1; i++)
-        {
-            if(num1 % i == 0)
-            {
-                sum1 += i;
+public class AmicableNos {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter two positive integers: ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Please enter valid whole numbers.");
+                return;
+            }
+            int first = scanner.nextInt();
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Please enter two valid whole numbers.");
+                return;
+            }
+            int second = scanner.nextInt();
+
+            if (first <= 0 || second <= 0) {
+                System.out.println("Both numbers must be positive.");
+                return;
+            }
+
+            long firstDivisorSum = sumOfProperDivisors(first);
+            long secondDivisorSum = sumOfProperDivisors(second);
+
+            if (first != second && firstDivisorSum == second && secondDivisorSum == first) {
+                System.out.println(first + " and " + second + " are amicable numbers.");
+            } else {
+                System.out.println(first + " and " + second + " are not amicable numbers.");
             }
         }
+    }
 
-        for(int j = 1; j < num2; j++)
-        {
-            if(num2 % j == 0)
-            {
-                sum2 += j;
+    private static long sumOfProperDivisors(int number) {
+        if (number == 1) {
+            return 0;
+        }
+
+        long sum = 1;
+        for (int divisor = 2; divisor <= number / divisor; divisor++) {
+            if (number % divisor == 0) {
+                sum += divisor;
+                int pairedDivisor = number / divisor;
+                if (pairedDivisor != divisor) {
+                    sum += pairedDivisor;
+                }
             }
         }
-
-        if(sum1 == num2 && sum2 == num1)
-        {
-            System.out.println(num1 + " and " + num2 + " are amicable numbers.");
-        }
-        else
-        {
-            System.out.println(num1 + " and " + num2 + " are not amicable numbers.");
-        }
+        return sum;
     }
 }
