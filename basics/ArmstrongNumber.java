@@ -2,23 +2,34 @@ import java.util.Scanner;
 
 public class ArmstrongNumber {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a 3-digit number: ");
-        int num = sc.nextInt();
-        int temp = num;
-        int sum = 0;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter a non-negative integer: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Please enter a valid whole number.");
+                return;
+            }
 
-        while (temp > 0) {
-            int digit = temp % 10;
-            sum = sum + (digit * digit * digit);
-            temp = temp / 10;
-        }
+            int number = scanner.nextInt();
+            if (number < 0) {
+                System.out.println("Please enter a non-negative number.");
+                return;
+            }
 
-        if (sum == num) {
-            System.out.println(num + " is an Armstrong Number.");
-        } else {
-            System.out.println(num + " is NOT an Armstrong Number.");
+            int digits = String.valueOf(number).length();
+            int remaining = number;
+            int sum = 0;
+
+            do {
+                int digit = remaining % 10;
+                sum += (int) Math.pow(digit, digits);
+                remaining /= 10;
+            } while (remaining > 0);
+
+            if (sum == number) {
+                System.out.println(number + " is an Armstrong number.");
+            } else {
+                System.out.println(number + " is not an Armstrong number.");
+            }
         }
-        sc.close();
     }
 }
