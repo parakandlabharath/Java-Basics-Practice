@@ -22,7 +22,6 @@ A growing collection of Java programs and small exercises practiced while learni
 | `data/` | Sample text data used by practice programs |
 | `mini-projects/` | Guided console application |
 | `projects/` | Employee Management project source |
-| `docs/mana-suraksha/` | Planning documents for the separate Mana Suraksha portfolio project |
 | `originals/` | Earlier source snapshots kept for reference; some are incomplete or need correction |
 
 ## Run a Java program
@@ -67,17 +66,6 @@ A Java console application to add, view, search, update, and delete employee rec
 - [Project guide and run instructions](projects/employee-management/README.md)
 - Concepts: OOP, encapsulation, constructors, ArrayList, exception handling, and input validation.
 - Current scope: in-memory storage; records reset when the application exits.
-
-## Mana Suraksha — portfolio project blueprint
-
-Mana Suraksha is a planned bilingual (Telugu/English) digital-fraud protection platform for checking suspicious SMS messages, links and phone-number reputation, and submitting fraud reports.
-
-**Planning documents only — implementation has not started.** These documents define the intended workflows and target architecture; they are not evidence that the Android app, web app, backend or detection engine has been implemented.
-
-- [Complete project workflow](docs/mana-suraksha/PROJECT_WORKFLOW.md)
-- [System design and architecture](docs/mana-suraksha/SYSTEM_DESIGN.md)
-
-The blueprint proposes a framework-independent Core Java analysis engine, a Spring Boot REST API, MySQL persistence, an Android client and a web client. It also documents privacy safeguards, Android call-screening limitations, report moderation and testing milestones.
 
 ## Learning note
 
