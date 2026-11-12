@@ -86,6 +86,16 @@ Some uploaded drafts had incomplete class declarations, incorrect imports, missi
 
 The `originals/` directory is a historical archive of the uploaded drafts. It intentionally preserves incomplete or broken snapshots for learning/reference; use the repaired examples above instead. Files in that archive ending in `.txt` are not part of the runnable Java source set.
 
+## System Design and Git learning notes
+
+I also document the engineering concepts I practise while preparing for Java backend interviews:
+
+- [System Design learning path](docs/system-design/README.md) — fundamentals, client-server architecture, APIs, layered backend design, database design, scalability and reliability.
+- [Student Management System case study](docs/system-design/02-student-management-system.md) — roles, relational data model, API outline and faculty marks-update workflow.
+- [Git and GitHub fundamentals](docs/git/GIT_GITHUB_FUNDAMENTALS.md) — repositories, staging, commits, push/pull, branching, merge conflicts, pull requests and CI/CD.
+
+These are learning notes and design exercises. They describe concepts and proposed architecture, not a claim that the example system is already implemented or deployed.
+
 ## Automatic compilation check
 
 A GitHub Actions workflow compiles the organized Java examples with JDK 17 whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
