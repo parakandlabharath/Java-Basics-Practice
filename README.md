@@ -8,7 +8,7 @@ A growing collection of Java programs and small exercises practiced while learni
 - **OOP:** inheritance, abstract classes, interfaces, and Java 17 sealed classes.
 - **Packages:** a user-defined package and importing a class from it.
 - **Collections:** `TreeSet`, `Comparable`, `HashSet`, `equals()`, and `hashCode()`.
-- **Mini projects:** Employee Management System.
+- **Mini projects:** Employee Management System and Mana Suraksha digital safety assistant.
 
 ## Folder guide
 
@@ -21,7 +21,7 @@ A growing collection of Java programs and small exercises practiced while learni
 | `collections/hashset/` | Product storage and updates using `HashSet` |
 | `data/` | Sample text data used by practice programs |
 | `mini-projects/` | Guided console application |
-| `projects/` | Employee Management project source |
+| `projects/` | Employee Management and Mana Suraksha project source |
 | `originals/` | Earlier source snapshots kept for reference; some are incomplete or need correction |
 
 ## Run a Java program
@@ -68,6 +68,15 @@ A Java console application to add, view, search, update, and delete employee rec
 - Current scope: local file persistence using a repository interface; records are reloaded after restart.
 - [Run and test guide](projects/employee-management/README.md) — setup, file format, tests, architecture, and limitations.
 
+### Mana Suraksha — Digital Safety Assistant
+
+A bilingual English/Telugu Core Java prototype for checking suspicious SMS text, URLs, and call behaviour using transparent heuristic rules.
+
+- [Source code](projects/mana-suraksha/src)
+- [Project guide and run/test instructions](projects/mana-suraksha/README.md)
+- Concepts: OOP, records, enums, interfaces, URL parsing, file persistence, backup/restore, and validation.
+- Important limitation: it is a learning prototype, not a guaranteed scam detector or an Android app. It does not open links or access SMS/call logs.
+
 ## Learning note
 
 These are hands-on learning exercises, not claims of production-ready applications. The `originals/` folder preserves earlier snapshots; use the organized folders above for the cleaned-up examples.
@@ -103,4 +112,4 @@ These are learning notes and design exercises. They describe concepts and propos
 
 ## Automatic compilation check
 
-A GitHub Actions workflow compiles the organized Java examples with JDK 17 and runs the Employee Management tests whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
+A GitHub Actions workflow compiles the organized Java examples with JDK 17 and runs the Employee Management and Mana Suraksha tests whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
