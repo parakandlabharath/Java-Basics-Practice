@@ -79,7 +79,7 @@ public class Main {
         }
         reports.forEach(report -> System.out.println(
                 report.createdAt() + " | " + report.category() + " | " +
-                report.riskLevel() + " | " + report.reason()));
+                report.riskLevel() + " | " + localizedReason(report)));
     }
 
     private static void backupReports() throws IOException {
@@ -91,9 +91,23 @@ public class Main {
 
     private static void printReport(ThreatReport report) {
         System.out.println("\n" + message("Risk level: ", "ప్రమాద స్థాయి: ") + report.riskLevel());
-        System.out.println(message("Reason: ", "కారణం: ") + report.reason());
+        System.out.println(message("Reason: ", "కారణం: ") + localizedReason(report));
         System.out.println(message("Report saved locally.", "నివేదిక స్థానికంగా సేవ్ చేయబడింది."));
         System.out.println(message("This is a rule-based warning, not a guaranteed scam detector.", "ఇది నియమాల ఆధారిత హెచ్చరిక మాత్రమే; మోసాన్ని ఖచ్చితంగా గుర్తించే సాధనం కాదు."));
+    }
+
+
+    private static String localizedReason(ThreatReport report) {
+        if (!telugu) return report.reason();
+        return switch (report.riskLevel()) {
+            case HIGH -> switch (report.category()) {
+                case SMS -> "ఈ సందేశంలో OTP/PIN వంటి రహస్య సమాచారాన్ని అడిగే లేదా అత్యవసర ఒత్తిడి చేసే సూచనలు ఉన్నాయి. వివరాలను పంచుకోవద్దు.";
+                case LINK -> "ఈ లింక్‌లో అనుమానాస్పద సూచనలు ఉన్నాయి. లింక్‌ను తెరవకుండా అధికారిక వెబ్‌సైట్‌ను మీరే టైప్ చేయండి.";
+                case CALL -> "ఈ కాల్‌లో మోసపూరితంగా రహస్య సమాచారం లేదా డబ్బు అడిగే సూచనలు ఉన్నాయి. కాల్ ముగించి అధికారిక నంబర్ ద్వారా నిర్ధారించండి.";
+            };
+            case MEDIUM -> "కొన్ని అనుమానాస్పద సూచనలు కనిపించాయి. స్పందించే ముందు అధికారిక మార్గంలో స్వతంత్రంగా నిర్ధారించండి.";
+            case LOW -> "సాధారణ హెచ్చరిక నమూనాలు కనిపించలేదు. అయినప్పటికీ ఇది సురక్షితమని హామీ కాదు.";
+        };
     }
 
     private static int readInt(String prompt) {
