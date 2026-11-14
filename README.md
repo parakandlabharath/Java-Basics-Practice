@@ -87,6 +87,10 @@ Some uploaded drafts had incomplete class declarations, incorrect imports, missi
 
 The `originals/` directory is a historical archive of the uploaded drafts. It intentionally preserves incomplete or broken snapshots for learning/reference; use the repaired examples above instead. Files in that archive ending in `.txt` are not part of the runnable Java source set.
 
+## Project completion tracker
+
+See [Project Completion Tracker](docs/PROJECT_COMPLETION_TRACKER.md) for the current status of all active repositories, the ten-point completion gate, and the next steps. A project is not marked finished just because CI builds it.
+
 ## System Design and Git learning notes
 
 I also document the engineering concepts I practise while preparing for Java backend interviews:
