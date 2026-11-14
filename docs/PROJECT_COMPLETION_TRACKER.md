@@ -7,7 +7,8 @@ This page is the single overview for the unfinished projects in the current GitH
 | Project | Repository | Current state | Main unfinished work |
 |---|---|---|---|
 | Employee Management System | [Java-Basics-Practice](https://github.com/parakandlabharath/Java-Basics-Practice/tree/main/projects/employee-management) | Core Java mini-project with file persistence and passing CI tests | Run the console app manually, capture a real screenshot, and verify backup/restore behavior |
-| Mana Suraksha | [Java-Basics-Practice](https://github.com/parakandlabharath/Java-Basics-Practice/tree/main/projects/mana-suraksha) | New bilingual Core Java prototype with local report storage and tests | Manual run, screenshots, and future Android/Spring Boot integration |\n| Code Quest | [Code-Quest](https://github.com/parakandlabharath/Code-Quest) | Recovered React/TypeScript coding-practice app; CI passes | Secure isolated code execution, durable server-side learner data, end-to-end tests |
+| Mana Suraksha | [Java-Basics-Practice](https://github.com/parakandlabharath/Java-Basics-Practice/tree/main/projects/mana-suraksha) | New bilingual Core Java prototype with local report storage and tests | Manual run, screenshots, and future Android/Spring Boot integration |
+| Code Quest | [Code-Quest](https://github.com/parakandlabharath/Code-Quest) | Recovered React/TypeScript coding-practice app; CI passes | Secure isolated code execution, durable server-side learner data, end-to-end tests |
 | PricePulse India | [Online-price-tracking](https://github.com/parakandlabharath/Online-price-tracking) | Recovered React/TypeScript watchlist app; CI passes | Verified retailer price source, historical observations, cross-device persistence, end-to-end tests |
 | Task Collaboration | [Task-Collaboration](https://github.com/parakandlabharath/Task-Collaboration) | Recovered real-time React/Express prototype; CI passes | Authentication/authorization, database-backed persistence, WebSocket integration tests |
 
@@ -15,18 +16,18 @@ This page is the single overview for the unfinished projects in the current GitH
 
 A project is only called **finished** when all applicable checks are verified. A successful TypeScript check or build alone is not proof that the main features work.
 
-| Check | Employee Management | Code Quest | PricePulse | Task Collaboration |
-|---|---|---|---|---|
-| Organized source | Done | Done | Done | Done |
-| Application builds | CI pass | CI pass | CI pass | CI pass |
-| Main features verified | CRUD/service tests pass; manual console run pending | Not complete: secure code runner disabled | Partial: watchlist works; live refresh disabled | Partial: event logic present; full browser integration pending |
-| Data stored and retrieved | Local file, reload and backup/restore covered by tests | Browser local storage plus validated JSON backup; leaderboard is in-memory | Browser local storage + JSON backup | Server JSON file with schema validation |
-| Validation/error handling | Employee fields and storage errors | Reward inputs and backup restore validated; old browser profiles still need schema migration | Imported and restored watchlists validated, including nested records and URL protocols | Nested WebSocket payload validation; no authenticated users |
-| Important tests | JDK-only CRUD/persistence tests pass in CI | Reward, lesson idempotency, coin spending, backup round-trip tests in CI | Watchlist import and nested record validation tests in CI | Nested payload validation tests in CI |
-| Accurate README/setup | Done | Done | Done | Done |
-| Real running screenshots | Pending | Pending | Pending | Pending |
-| GitHub Actions | Pass | Pass | Pass | Pass |
-| Interview architecture explanation | Done in README | Done in README | Done in README | Done in README |
+| Check | Employee Management | Mana Suraksha | Code Quest | PricePulse | Task Collaboration |
+|---|---|---|---|---|---|
+| Organized source | Done | Done | Done | Done | Done |
+| Application builds | CI pass | CI pass | CI pass | CI pass | CI pass |
+| Main features verified | CRUD/service tests pass; manual console run pending | SMS/link/call rules and report persistence covered by tests; manual run pending | Secure code runner disabled | Partial: watchlist works; live refresh disabled | Partial: event logic present; full browser integration pending |
+| Data stored and retrieved | Local file, reload and backup covered by tests | Local report file, reload and backup covered by tests | Browser local storage plus validated JSON backup; leaderboard is in-memory | Browser local storage + JSON backup | Server JSON file with schema validation |
+| Validation/error handling | Employee fields and storage errors | Empty/oversized inputs, URL parsing, and report file validation | Reward inputs, local profile/challenge data, and backup restore validated | Imported/restored watchlists validated, including nested records and URL protocols | Nested WebSocket payload and persisted workspace validation; no authenticated users |
+| Important tests | JDK-only CRUD/persistence/backup tests pass in CI | JDK-only analyzer/report/backup tests pass in CI | Reward, lesson idempotency, coin spending, backup round-trip, local storage validation tests in CI | Watchlist import and nested record validation tests in CI | Nested payload validation tests in CI |
+| Accurate README/setup | Done | Done | Done | Done | Done |
+| Real running screenshots | Pending | Pending | Pending | Pending | Pending |
+| GitHub Actions | Pass | Pass | Pass | Pass | Pass |
+| Interview architecture explanation | Done in README | Done in README | Done in README | Done in README | Done in README |
 
 ## What the recent GitHub updates changed
 
