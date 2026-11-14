@@ -1,15 +1,30 @@
 package employeeapp;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final EmployeeManager MANAGER = new EmployeeManager();
+    private static EmployeeManager MANAGER;
 
     public static void main(String[] args) {
+        try {
+            MANAGER = new EmployeeManager(
+                    new CsvEmployeeRepository(Path.of("data", "employees.txt")));
+            runMenu();
+        } catch (IOException exception) {
+            System.err.println("Unable to open employee data: " + exception.getMessage());
+        } finally {
+            SCANNER.close();
+        }
+    }
+
+    private static void runMenu() {
         boolean running = true;
         System.out.println("=== Employee Management System ===");
+        System.out.println("Records are saved in data/employees.txt.");
 
         while (running) {
             printMenu();
@@ -29,23 +44,24 @@ public class Main {
                 }
             } catch (IllegalArgumentException exception) {
                 System.out.println("Input error: " + exception.getMessage());
+            } catch (IOException exception) {
+                System.out.println("Storage error: " + exception.getMessage());
             }
         }
-        SCANNER.close();
     }
 
     private static void printMenu() {
-        System.out.println("\n1. Add employee\n2. View all employees\n3. Search by ID");
-        System.out.println("4. Update employee\n5. Delete employee\n0. Exit");
+        System.out.println("\\n1. Add employee\\n2. View all employees\\n3. Search by ID");
+        System.out.println("4. Update employee\\n5. Delete employee\\n0. Exit");
     }
 
-    private static void addEmployee() {
+    private static void addEmployee() throws IOException {
         int id = readInt("Employee ID: ");
         String name = readText("Name: ");
         String department = readText("Department: ");
         double salary = readDouble("Salary: ");
         if (MANAGER.addEmployee(new Employee(id, name, department, salary))) {
-            System.out.println("Employee added.");
+            System.out.println("Employee added and saved.");
         } else {
             System.out.println("That employee ID already exists.");
         }
@@ -65,18 +81,18 @@ public class Main {
         System.out.println(employee == null ? "Employee not found." : employee);
     }
 
-    private static void updateEmployee() {
+    private static void updateEmployee() throws IOException {
         int id = readInt("Employee ID to update: ");
         String name = readText("New name: ");
         String department = readText("New department: ");
         double salary = readDouble("New salary: ");
         System.out.println(MANAGER.updateEmployee(id, name, department, salary)
-                ? "Employee updated." : "Employee not found.");
+                ? "Employee updated and saved." : "Employee not found.");
     }
 
-    private static void deleteEmployee() {
+    private static void deleteEmployee() throws IOException {
         System.out.println(MANAGER.deleteEmployee(readInt("Employee ID to delete: "))
-                ? "Employee deleted." : "Employee not found.");
+                ? "Employee deleted and saved." : "Employee not found.");
     }
 
     private static String readText(String prompt) {
@@ -102,9 +118,7 @@ public class Main {
             System.out.print(prompt);
             try {
                 double value = Double.parseDouble(SCANNER.nextLine().trim());
-                if (Double.isFinite(value) && value >= 0) {
-                    return value;
-                }
+                if (Double.isFinite(value) && value >= 0) return value;
                 System.out.println("Enter a finite, non-negative amount.");
             } catch (NumberFormatException exception) {
                 System.out.println("Please enter a valid number.");
