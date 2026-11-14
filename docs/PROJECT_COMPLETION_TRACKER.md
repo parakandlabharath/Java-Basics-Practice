@@ -20,7 +20,7 @@ A project is only called **finished** when all applicable checks are verified. A
 | Organized source | Done | Done | Done | Done |
 | Application builds | CI pass | CI pass | CI pass | CI pass |
 | Main features verified | CRUD/service tests pass; manual console run pending | Not complete: secure code runner disabled | Partial: watchlist works; live refresh disabled | Partial: event logic present; full browser integration pending |
-| Data stored and retrieved | Local file, reload covered by tests | Browser local storage; leaderboard is in-memory | Browser local storage + JSON backup | Server JSON file |
+| Data stored and retrieved | Local file, reload and backup/restore covered by tests | Browser local storage plus validated JSON backup; leaderboard is in-memory | Browser local storage + JSON backup | Server JSON file with schema validation |
 | Validation/error handling | Employee fields and storage errors | Reward inputs and backup restore validated; old browser profiles still need schema migration | Imported and restored watchlists validated, including nested records and URL protocols | Nested WebSocket payload validation; no authenticated users |
 | Important tests | JDK-only CRUD/persistence tests pass in CI | Reward, lesson idempotency, coin spending, backup round-trip tests in CI | Watchlist import and nested record validation tests in CI | Nested payload validation tests in CI |
 | Accurate README/setup | Done | Done | Done | Done |
@@ -36,11 +36,13 @@ A project is only called **finished** when all applicable checks are verified. A
 - Added tests for create, duplicate rejection, search, update, delete, validation, and reload after restart.
 - Updated the console application and setup guide.
 - Local records are written to `projects/employee-management/data/employees.txt` and are excluded from Git.
+- Added menu option 6 to create a timestamped backup under `backups/`; backup and restore are covered by the test suite.
 
 ### Code Quest
 - Extracted challenge reward calculations into pure TypeScript functions.
 - Made lesson rewards idempotent by lesson ID and tested duplicate completion and coin spending.
 - Added validated JSON export/import for learner profiles and generated custom challenges.
+- Validated existing localStorage profile/challenge data before restoring it, with safe fallback for malformed values.
 - Clarified that arbitrary code execution is disabled until a secure sandbox is available.
 - Updated the root README to describe the recovered React/Express application, not an unimplemented Spring Boot task manager.
 
@@ -52,6 +54,7 @@ A project is only called **finished** when all applicable checks are verified. A
 
 ### Task Collaboration
 - Added validation helpers and tests for task, project, comment, nested assignee/checklist, date, and status payloads.
+- Validated persisted workspace records before loading the JSON data file.
 - Scoped task and comment changes to the WebSocket connection's selected project.
 - Used the connected session's demo identity for comment attribution.
 - Added a WebSocket message-size limit.
