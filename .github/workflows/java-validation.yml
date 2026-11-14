@@ -56,4 +56,10 @@ jobs:
 
           java -cp "$BUILD_DIR/employee-management" employeeapp.EmployeeManagerTest
 
-          echo "All organized Java examples compiled and tested successfully."
+          mkdir -p "$BUILD_DIR/mana-suraksha"
+          mapfile -d '' MANA_SOURCES < <(find projects/mana-suraksha/src -name '*.java' -print0)
+          mapfile -d '' MANA_TESTS < <(find projects/mana-suraksha/test -name '*.java' -print0)
+          javac -d "$BUILD_DIR/mana-suraksha" "${MANA_SOURCES[@]}" "${MANA_TESTS[@]}"
+          java -cp "$BUILD_DIR/mana-suraksha" com.manasuraksha.ThreatAnalyzerTest
+
+          echo "All organized Java examples and mini-project tests compiled and passed."
