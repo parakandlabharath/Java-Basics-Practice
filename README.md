@@ -60,12 +60,13 @@ The two collection examples intentionally keep separate `Product` classes becaus
 
 ### Employee Management System
 
-A Java console application to add, view, search, update, and delete employee records.
+A Java console application to add, view, search, update, and delete employee records, with local file persistence and JDK-only tests.
 
 - [Source code](projects/employee-management/src/employeeapp)
 - [Project guide and run instructions](projects/employee-management/README.md)
 - Concepts: OOP, encapsulation, constructors, ArrayList, exception handling, and input validation.
-- Current scope: in-memory storage; records reset when the application exits.
+- Current scope: local file persistence using a repository interface; records are reloaded after restart.
+- [Run and test guide](projects/employee-management/README.md) — setup, file format, tests, architecture, and limitations.
 
 ## Learning note
 
@@ -98,4 +99,4 @@ These are learning notes and design exercises. They describe concepts and propos
 
 ## Automatic compilation check
 
-A GitHub Actions workflow compiles the organized Java examples with JDK 17 whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
+A GitHub Actions workflow compiles the organized Java examples with JDK 17 and runs the Employee Management tests whenever code is pushed or a pull request targets `main`. The historical `originals/` archive is excluded intentionally.
