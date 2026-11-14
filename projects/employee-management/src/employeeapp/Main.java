@@ -8,11 +8,12 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static EmployeeManager MANAGER;
+    private static CsvEmployeeRepository REPOSITORY;
 
     public static void main(String[] args) {
         try {
-            MANAGER = new EmployeeManager(
-                    new CsvEmployeeRepository(Path.of("data", "employees.txt")));
+            REPOSITORY = new CsvEmployeeRepository(Path.of("data", "employees.txt"));
+            MANAGER = new EmployeeManager(REPOSITORY);
             runMenu();
         } catch (IOException exception) {
             System.err.println("Unable to open employee data: " + exception.getMessage());
@@ -36,6 +37,7 @@ public class Main {
                     case 3 -> searchEmployee();
                     case 4 -> updateEmployee();
                     case 5 -> deleteEmployee();
+                    case 6 -> backupData();
                     case 0 -> {
                         running = false;
                         System.out.println("Goodbye!");
@@ -52,7 +54,7 @@ public class Main {
 
     private static void printMenu() {
         System.out.println("\\n1. Add employee\\n2. View all employees\\n3. Search by ID");
-        System.out.println("4. Update employee\\n5. Delete employee\\n0. Exit");
+        System.out.println("4. Update employee\\n5. Delete employee\\n6. Backup data\\n0. Exit");
     }
 
     private static void addEmployee() throws IOException {
@@ -93,6 +95,13 @@ public class Main {
     private static void deleteEmployee() throws IOException {
         System.out.println(MANAGER.deleteEmployee(readInt("Employee ID to delete: "))
                 ? "Employee deleted and saved." : "Employee not found.");
+    }
+
+    private static void backupData() throws IOException {
+        Path backupPath = Path.of("backups", "employees-" + System.currentTimeMillis() + ".txt");
+        REPOSITORY.backupTo(backupPath);
+        System.out.println("Backup created: " + backupPath.toString());
+        System.out.println("Copy this backup to another device or cloud storage to protect it.");
     }
 
     private static String readText(String prompt) {
