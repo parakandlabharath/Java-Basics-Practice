@@ -16,6 +16,12 @@ public class EmployeeManagerTest {
         check(manager.findById(101) != null, "find employee");
         check(manager.updateEmployee(101, "Asha Kumar", "Engineering", 42000), "update employee");
 
+        Path backupFile = folder.resolve("backup").resolve("employees-backup.txt");
+        repository.backupTo(backupFile);
+        EmployeeRepository backupRepository = new CsvEmployeeRepository(backupFile);
+        check(backupRepository.findAll().size() == 1, "export backup file");
+        check("Asha Kumar".equals(backupRepository.findAll().get(0).getName()), "restore backup contents");
+
         EmployeeManager reloaded = new EmployeeManager(repository);
         check(reloaded.findById(101) != null, "load persisted employee");
         check("Asha Kumar".equals(reloaded.findById(101).getName()), "persist updated name");
@@ -30,6 +36,8 @@ public class EmployeeManagerTest {
         expectIllegalArgument(() -> new Employee(102, "Name", "IT", -1), "negative salary");
 
         Files.deleteIfExists(dataFile);
+        Files.deleteIfExists(backupFile);
+        Files.deleteIfExists(backupFile.getParent());
         Files.deleteIfExists(folder);
         System.out.println("EmployeeManagerTest: all tests passed.");
     }
