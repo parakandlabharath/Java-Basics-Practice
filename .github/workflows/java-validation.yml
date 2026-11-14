@@ -50,7 +50,6 @@ jobs:
             basics/packages/PackageDemo.java
 
           mkdir -p "$BUILD_DIR/employee-management"
-          mkdir -p "$BUILD_DIR/employee-management"
           javac -d "$BUILD_DIR/employee-management" \
             projects/employee-management/src/employeeapp/*.java \
             projects/employee-management/test/employeeapp/EmployeeManagerTest.java
