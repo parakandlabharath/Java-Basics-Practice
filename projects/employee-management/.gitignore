@@ -2,3 +2,4 @@ out/
 *.class
 data/employees.txt
 data/employees.txt.tmp
+backups/
