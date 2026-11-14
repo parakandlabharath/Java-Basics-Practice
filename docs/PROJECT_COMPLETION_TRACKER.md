@@ -7,7 +7,7 @@ This page is the single overview for the unfinished projects in the current GitH
 | Project | Repository | Current state | Main unfinished work |
 |---|---|---|---|
 | Employee Management System | [Java-Basics-Practice](https://github.com/parakandlabharath/Java-Basics-Practice/tree/main/projects/employee-management) | Core Java mini-project with file persistence and passing CI tests | Run the console app manually, capture a real screenshot, and verify backup/restore behavior |
-| Code Quest | [Code-Quest](https://github.com/parakandlabharath/Code-Quest) | Recovered React/TypeScript coding-practice app; CI passes | Secure isolated code execution, durable server-side learner data, end-to-end tests |
+| Mana Suraksha | [Java-Basics-Practice](https://github.com/parakandlabharath/Java-Basics-Practice/tree/main/projects/mana-suraksha) | New bilingual Core Java prototype with local report storage and tests | Manual run, screenshots, and future Android/Spring Boot integration |\n| Code Quest | [Code-Quest](https://github.com/parakandlabharath/Code-Quest) | Recovered React/TypeScript coding-practice app; CI passes | Secure isolated code execution, durable server-side learner data, end-to-end tests |
 | PricePulse India | [Online-price-tracking](https://github.com/parakandlabharath/Online-price-tracking) | Recovered React/TypeScript watchlist app; CI passes | Verified retailer price source, historical observations, cross-device persistence, end-to-end tests |
 | Task Collaboration | [Task-Collaboration](https://github.com/parakandlabharath/Task-Collaboration) | Recovered real-time React/Express prototype; CI passes | Authentication/authorization, database-backed persistence, WebSocket integration tests |
 
@@ -38,6 +38,12 @@ A project is only called **finished** when all applicable checks are verified. A
 - Local records are written to `projects/employee-management/data/employees.txt` and are excluded from Git.
 - Added menu option 6 to create a timestamped backup under `backups/`; backup and restore are covered by the test suite.
 
+### Mana Suraksha
+- Created a bilingual English/Telugu Core Java console prototype for SMS, link, and call-behaviour review.
+- Added rule-based LOW/MEDIUM/HIGH risk explanations without opening URLs or sending user content to an external service.
+- Added local report storage, report listing, backup export, and JDK-only analyzer/persistence tests.
+- Documented that this is a heuristic prototype, not a guaranteed scam detector or a mobile app.
+
 ### Code Quest
 - Extracted challenge reward calculations into pure TypeScript functions.
 - Made lesson rewards idempotent by lesson ID and tested duplicate completion and coin spending.
@@ -65,13 +71,13 @@ A project is only called **finished** when all applicable checks are verified. A
 
 - The three recovered web apps are React/TypeScript + Express projects. Their previous root README files incorrectly described stacks or source states that did not match the recovered code. Those descriptions have been corrected.
 - The recovered Code Quest codebase is a gamified coding-practice app; it is not currently the Java/Spring Boot team task manager that had been discussed earlier.
-- **Mana Suraksha** was previously discussed as a concept and architecture, but no separate GitHub repository or application source was verified. It is not counted as an existing code repository here.
+- **Mana Suraksha** is now implemented as a distinct project folder under Java-Basics-Practice because a separate repository-creation action was not available in this workflow. The current version is a Core Java console prototype, not the Android/Spring Boot application originally envisioned.
 - The Placement Management System idea was declined, so it is not being created as a new project.
 - The older single-file Employee Management exercise remains preserved under `mini-projects/employee-management-system/`; the structured, file-backed project under `projects/employee-management/` is the primary version.
 
 ## Next completion order
 
-1. Manually run Employee Management, test it from a clean folder, and capture a genuine screenshot.
+1. Manually run Employee Management and Mana Suraksha, test their console flows from a clean folder, and capture genuine screenshots.
 2. Add WebSocket integration tests and a browser run-through for Task Collaboration; plan authentication before any public deployment.
 3. Decide whether Code Quest should remain a coding-practice product; only then implement a secure isolated judge.
 4. Integrate a verified retailer price source into PricePulse before claiming automatic tracking or historical price trends.
