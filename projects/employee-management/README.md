@@ -11,6 +11,7 @@ A small Java 17 console application for managing employee records. This is the p
 - Delete employee records
 - Validate names, departments, IDs, and salary values
 - Save records to a local file and reload them after restarting the application
+- Export a timestamped backup file from the console menu
 - Write data through a temporary file and replace the previous file after a successful write
 
 ## Concepts demonstrated
@@ -57,7 +58,7 @@ javac -d out src/employeeapp/*.java
 java -cp out employeeapp.Main
 ```
 
-The application creates `data/employees.txt` automatically. That local data file is ignored by Git so personal employee records are not committed. Back it up separately if the records matter.
+The application creates `data/employees.txt` automatically. Choose menu option 6 to create a timestamped copy under `backups/`. Both folders are ignored by Git so personal employee records are not committed. Copy a backup to another device or trusted cloud storage; GitHub source-code commits do not automatically back up these runtime records.
 
 ## Run tests
 
@@ -91,7 +92,7 @@ The repository uses Base64-encoded text fields so employee names or departments 
 ## Known limitations
 
 - This is a single-user local console project, not a deployed HR system.
-- The file is not encrypted. Do not store sensitive real employee data in it.
+- The data and backup files are not encrypted. Do not store sensitive real employee data in them.
 - It does not yet use JDBC, MySQL, authentication, or a graphical interface.
 - The older single-file demo remains under `mini-projects/employee-management-system/` for comparison; use this structured project as the main version.
 
