@@ -1,82 +1,100 @@
 # Employee Management System
 
-A beginner-friendly Java console project for managing employee records. It is designed as a hands-on learning project for practising Core Java concepts.
+A small Java 17 console application for managing employee records. This is the primary Employee Management mini-project in this repository.
 
 ## Features
-- Add employees with unique IDs
-- Display all employees
-- Search employees by ID
+
+- Add employees with unique positive IDs
+- List all employees
+- Search by employee ID
 - Update employee details
 - Delete employee records
-- Validate text and numeric input
+- Validate names, departments, IDs, and salary values
+- Save records to a local file and reload them after restarting the application
+- Write data through a temporary file and replace the previous file after a successful write
 
-## Technology and concepts
-- Java 17
-- Classes, objects, constructors, encapsulation
-- ArrayList and List
-- Loops, methods, and switch expressions
+## Concepts demonstrated
+
+- Classes, objects, constructors, and encapsulation
+- ArrayList and collection operations
+- Interface-based repository design
+- File I/O, UTF-8, Base64 encoding, and atomic file replacement
 - Exception handling and input validation
+- Unit-style tests using only the Java standard library
 
 ## Project structure
+
 ```text
 employee-management/
+├── .gitignore
 ├── README.md
-└── src/
-    └── employeeapp/
-        ├── Employee.java
-        ├── EmployeeManager.java
-        └── Main.java
+├── src/employeeapp/
+│   ├── Employee.java
+│   ├── EmployeeManager.java
+│   ├── EmployeeRepository.java
+│   ├── CsvEmployeeRepository.java
+│   └── Main.java
+└── test/employeeapp/
+    └── EmployeeManagerTest.java
 ```
 
-## Run the project
-Open a terminal in this folder and run:
+## Run the application
+
+Requires JDK 17 or later. Open a terminal in this folder.
 
 **Windows PowerShell**
+
 ```powershell
 javac -d out src/employeeapp/*.java
 java -cp out employeeapp.Main
 ```
 
 **macOS / Linux**
+
 ```bash
 mkdir -p out
 javac -d out src/employeeapp/*.java
 java -cp out employeeapp.Main
 ```
 
-Requires JDK 17 or later.
+The application creates `data/employees.txt` automatically. That local data file is ignored by Git so personal employee records are not committed. Back it up separately if the records matter.
 
-## Example
-```text
-=== Employee Management System ===
-1. Add employee
-2. View all employees
-3. Search by ID
-4. Update employee
-5. Delete employee
-0. Exit
-Choose an option: 1
-Employee ID: 101
-Name: Asha
-Department: Engineering
-Salary: 35000
-Employee added.
+## Run tests
+
+**Windows PowerShell**
+
+```powershell
+javac -d out src/employeeapp/*.java test/employeeapp/EmployeeManagerTest.java
+java -cp out employeeapp.EmployeeManagerTest
 ```
 
+**macOS / Linux**
+
+```bash
+mkdir -p out
+javac -d out src/employeeapp/*.java test/employeeapp/EmployeeManagerTest.java
+java -cp out employeeapp.EmployeeManagerTest
+```
+
+The tests cover adding, duplicate-ID rejection, searching, updating, deleting, persistence after reload, and invalid employee values. GitHub Actions compiles the Java examples and runs these tests on pushes and pull requests.
+
+## Architecture
+
+- **Employee** — stores one employee and validates its fields.
+- **EmployeeRepository** — defines the persistence contract.
+- **CsvEmployeeRepository** — reads/writes a simple local text data file.
+- **EmployeeManager** — applies add/search/update/delete rules and saves successful changes.
+- **Main** — handles the console menu and user input.
+
+The repository uses Base64-encoded text fields so employee names or departments containing commas, pipes, or line breaks do not corrupt the record format.
+
+## Known limitations
+
+- This is a single-user local console project, not a deployed HR system.
+- The file is not encrypted. Do not store sensitive real employee data in it.
+- It does not yet use JDBC, MySQL, authentication, or a graphical interface.
+- The older single-file demo remains under `mini-projects/employee-management-system/` for comparison; use this structured project as the main version.
+
 ## Interview explanation
-- **Encapsulation:** employee fields are private and accessed through methods.
-- **Constructor:** initializes an employee and validates its starting values.
-- **Collections:** an ArrayList stores employee objects and grows dynamically.
-- **Separation of responsibilities:** Employee models one record, EmployeeManager performs operations, and Main handles console interaction.
-- **Exception handling:** invalid input is reported and the menu continues.
 
-## Current limitations
-This first version stores records in memory, so data is cleared when the program exits. It does not yet use MySQL, JDBC, or a graphical interface.
-
-## Planned improvements
-1. Save records using file handling.
-2. Add unit tests.
-3. Add JDBC and MySQL persistence.
-4. Add department filtering and salary sorting.
-
-Build, run, and modify this project to understand each feature before discussing it in an interview.
+The application separates the model, business operations, persistence contract, file repository, and console UI. The manager depends on an `EmployeeRepository` interface rather than directly depending on file operations. The file implementation loads records when the manager starts and saves after successful CRUD operations. Tests use a temporary file so they can verify that records survive a new manager instance without touching a user's real data.
