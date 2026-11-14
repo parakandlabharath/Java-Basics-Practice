@@ -21,8 +21,8 @@ A project is only called **finished** when all applicable checks are verified. A
 | Application builds | CI pass | CI pass | CI pass | CI pass |
 | Main features verified | CRUD/service tests pass; manual console run pending | Not complete: secure code runner disabled | Partial: watchlist works; live refresh disabled | Partial: event logic present; full browser integration pending |
 | Data stored and retrieved | Local file, reload covered by tests | Browser local storage; leaderboard is in-memory | Browser local storage + JSON backup | Server JSON file |
-| Validation/error handling | Employee fields and storage errors | Reward rules tested; stored-profile validation pending | Imported watchlist validation tested | WebSocket payload validation tested; no authenticated users |
-| Important tests | JDK-only tests pass in CI | Reward unit tests pass in CI | Import-validation unit tests pass in CI | Validation unit tests pass in CI |
+| Validation/error handling | Employee fields and storage errors | Reward inputs and backup restore validated; old browser profiles still need schema migration | Imported and restored watchlists validated, including nested records and URL protocols | Nested WebSocket payload validation; no authenticated users |
+| Important tests | JDK-only CRUD/persistence tests pass in CI | Reward, lesson idempotency, coin spending, backup round-trip tests in CI | Watchlist import and nested record validation tests in CI | Nested payload validation tests in CI |
 | Accurate README/setup | Done | Done | Done | Done |
 | Real running screenshots | Pending | Pending | Pending | Pending |
 | GitHub Actions | Pass | Pass | Pass | Pass |
@@ -38,22 +38,24 @@ A project is only called **finished** when all applicable checks are verified. A
 - Local records are written to `projects/employee-management/data/employees.txt` and are excluded from Git.
 
 ### Code Quest
-- Extracted challenge reward calculations into a pure TypeScript function.
-- Added tests for reward calculation, level-up, duplicate completion, and invalid rewards.
+- Extracted challenge reward calculations into pure TypeScript functions.
+- Made lesson rewards idempotent by lesson ID and tested duplicate completion and coin spending.
+- Added validated JSON export/import for learner profiles and generated custom challenges.
 - Clarified that arbitrary code execution is disabled until a secure sandbox is available.
 - Updated the root README to describe the recovered React/Express application, not an unimplemented Spring Boot task manager.
 
 ### PricePulse India
-- Added strict validation before importing a watchlist JSON backup.
-- Added tests for valid records, missing fields, invalid prices, duplicate IDs, and invalid deal scores.
+- Added strict validation before importing or restoring a watchlist JSON backup, including nested history/store records and HTTP(S) URLs.
+- Preserved human-readable legacy demo history labels so an exported demo watchlist can be restored.
 - Removed generated fake 30/60-day historical observations when a product is first added.
 - Updated the UI and README to describe AI results as estimates, not verified live retailer prices.
 
 ### Task Collaboration
-- Added validation helpers and tests for task, project, comment, and status payloads.
+- Added validation helpers and tests for task, project, comment, nested assignee/checklist, date, and status payloads.
 - Scoped task and comment changes to the WebSocket connection's selected project.
 - Used the connected session's demo identity for comment attribution.
 - Added a WebSocket message-size limit.
+- Added client-facing warnings when the server cannot save a workspace change to disk.
 - Documented that preset identities are not authentication and the JSON file is prototype-level persistence.
 
 ## Important recovery notes
@@ -72,4 +74,4 @@ A project is only called **finished** when all applicable checks are verified. A
 4. Integrate a verified retailer price source into PricePulse before claiming automatic tracking or historical price trends.
 5. Capture real screenshots for each app only after each one has been launched and its main user flow tested.
 
-**Current conclusion:** the repositories are better organized and CI now exercises meaningful tests, but the four projects are not all finished. Their remaining work is listed explicitly above; no fake screenshots or unverified live-price features have been added.
+**Current conclusion:** all four repositories have updated source, documentation, and passing GitHub Actions validation for the latest verified commits (14 November 2026). They are not all production-finished: secure code execution, verified retailer feeds, real authentication, browser end-to-end tests, and actual application screenshots remain outstanding. No fake screenshots or unverified live-price features have been added.
