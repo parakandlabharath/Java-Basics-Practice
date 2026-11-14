@@ -50,9 +50,11 @@ jobs:
             basics/packages/PackageDemo.java
 
           mkdir -p "$BUILD_DIR/employee-management"
+          mkdir -p "$BUILD_DIR/employee-management"
           javac -d "$BUILD_DIR/employee-management" \
-            projects/employee-management/src/employeeapp/Employee.java \
-            projects/employee-management/src/employeeapp/EmployeeManager.java \
-            projects/employee-management/src/employeeapp/Main.java
+            projects/employee-management/src/employeeapp/*.java \
+            projects/employee-management/test/employeeapp/EmployeeManagerTest.java
 
-          echo "All organized Java examples compiled successfully."
+          java -cp "$BUILD_DIR/employee-management" employeeapp.EmployeeManagerTest
+
+          echo "All organized Java examples compiled and tested successfully."
