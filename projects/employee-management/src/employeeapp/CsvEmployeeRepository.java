@@ -52,6 +52,17 @@ public class CsvEmployeeRepository implements EmployeeRepository {
     }
 
     @Override
+    public void backupTo(Path destination) throws IOException {
+        if (destination == null) throw new IllegalArgumentException("Backup destination is required.");
+        if (!Files.exists(file)) {
+            throw new IOException("No employee data file exists yet. Add an employee before creating a backup.");
+        }
+        Path parent = destination.toAbsolutePath().getParent();
+        if (parent != null) Files.createDirectories(parent);
+        Files.copy(file, destination, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    @Override
     public void saveAll(List<Employee> employees) throws IOException {
         Path parent = file.toAbsolutePath().getParent();
         if (parent != null) Files.createDirectories(parent);
